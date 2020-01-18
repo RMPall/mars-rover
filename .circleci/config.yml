@@ -19,7 +19,6 @@ jobs:
     docker:
       # specify the version
       - image: circleci/golang:1.9
-  test:
     working_directory: /root/.go_workspace/src/github.com/mars-rover
     environment:
       PROJECT: "mars-rover"
@@ -37,4 +36,4 @@ workflows:
   version: 2
   test:
     jobs:
-      - test
+      - build
