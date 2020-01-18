@@ -1,39 +1,25 @@
-version: 2.1
-
-commands:
-  git_ssh_config:
-    description: "Configures Git / SSH config for Go Modules to pull Private Repositories"
-    steps:
-      - run:
-          name: Update Git / SSH Config
-          command: |
-            echo '[url "git@github.com:"]
-                insteadOf = http://github.com/
-                insteadOf = https://github.com/
-                insteadOf = git://github.com/
-                insteadOf = git+ssh://github.com/' > ~/.gitconfig
-            echo 'Host github.com
-                    StrictHostKeyChecking no' > ~/.ssh/config
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
 jobs:
   build:
     docker:
       # specify the version
       - image: circleci/golang:1.9
-    working_directory: /root/.go_workspace/src/github.com/mars-rover
-    environment:
-      PROJECT: "mars-rover"
-      GO111MODULE: "on"
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    #### TEMPLATE_NOTE: go expects specific checkout path representing url
+    #### expecting it in the form of
+    ####   /go/src/github.com/circleci/go-tool
+    ####   /go/src/bitbucket.org/circleci/go-tool
+    working_directory: /go/src/github.com/mars-rover
     steps:
       - checkout
-      - git_ssh_config
-      - run:
-          name: go lint
-          command: make lint
-      - run:
-          name: go test
-          command: make test
-workflows:
-  version: 2
-  test:
-    jobs:
-      - build
+
+      # specify any bash command here prefixed with `run: `
+      - run: go test -v ./...
