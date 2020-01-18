@@ -18,8 +18,12 @@ jobs:
     ####   /go/src/github.com/circleci/go-tool
     ####   /go/src/bitbucket.org/circleci/go-tool
     working_directory: /go/src/github.com/mars-rover
+    environment:
+      PROJECT: "mars-rover"
+      GO111MODULE: "on"
     steps:
       - checkout
+      - run: go build ./...
 
       # specify any bash command here prefixed with `run: `
       - run: go test -v ./...
