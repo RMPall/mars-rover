@@ -4,10 +4,16 @@ import (
 	"fmt"
 )
 
+const (
+	Disabled = "Disabled"
+	Active   = "Active"
+)
+
 type Robot struct {
 	ID          int
 	Position    Position
 	Instruction Instruction
+	Status      string
 }
 
 type Position struct {
@@ -24,6 +30,7 @@ func NewRobot() *Robot {
 				Y: 0,
 			},
 		},
+		Status: Disabled,
 	}
 }
 
@@ -32,6 +39,7 @@ func (r *Robot) SetInitialPosition(x, y int, orientation *Orientation) {
 	r.Position.Coordinate.X = x
 	r.Position.Coordinate.Y = y
 	r.Position.Orientation = orientation
+	r.Status = Active
 }
 
 // MoveForward is an instruction to the robot to move forward one grid point, and maintain the same heading.
