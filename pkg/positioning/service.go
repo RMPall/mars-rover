@@ -8,9 +8,10 @@ import (
 )
 
 const (
-	exceededCoordinateLimitErrMsg = "Coordinate limit of %v has been exceeded in either or both of the supplied inputs"
-	invalidRobotInstructionErrMsg = "Unknown or invalid instruction is provided"
-	failedToProccessInstruction   = "Failed to process instruction"
+	exceededCoordinateLimitErrMsg     = "Coordinate limit of %v has been exceeded in either or both of the supplied inputs"
+	invalidRobotInstructionErrMsg     = "Unknown or invalid instruction is provided"
+	failedToProccessInstructionErrMsg = "Failed to process instruction"
+	failedToProvideInstructionErrMsg  = "Cannot provide instruction to the robot without placing it initially on the grid"
 )
 
 // Repository interface consists if save. Save saves a robot toa repository.
@@ -53,6 +54,9 @@ func (i *Interactor) RobotPlacement(x, y int, orientation *Orientation) error {
 // GiveInstructions provides valid instructions to the robot.
 // If an invalid instruction is specified then an error is returned.
 func (i *Interactor) GiveInstructions(instructions []string) error {
+	if i.Robot.Status == Disabled {
+		return errors.New(failedToProvideInstructionErrMsg)
+	}
 	for _, instruction := range instructions {
 		if !IsInstructionAllowed(Instruction(instruction)) {
 			return errors.New(invalidRobotInstructionErrMsg)
@@ -68,6 +72,7 @@ func (i *Interactor) GiveInstructions(instructions []string) error {
 			return err
 		}
 
+		i.Robot.Status = Disabled
 	}
 	return nil
 }
@@ -86,7 +91,7 @@ func (i *Interactor) execute(instruction string) (*Robot, error) {
 			return i.Robot, err
 		}
 	default:
-		return nil, errors.New(failedToProccessInstruction)
+		return nil, errors.New(failedToProccessInstructionErrMsg)
 
 	}
 	return i.Robot, nil

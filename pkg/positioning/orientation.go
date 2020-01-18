@@ -3,21 +3,23 @@ package positioning
 type Orientation int
 
 const (
-	N Orientation = iota
+	Unknown Orientation = iota
+	N
 	E
 	S
 	W
 )
 
 var StringToOrientation = map[string]Orientation{
-	"N": N,
-	"E": E,
-	"S": S,
-	"W": W,
+	"Unknown": Unknown,
+	"N":       N,
+	"E":       E,
+	"S":       S,
+	"W":       W,
 }
 
 func (o Orientation) String() string {
-	return [...]string{"N", "E", "S", "W"}[o]
+	return [...]string{"Unknown", "N", "E", "S", "W"}[o]
 }
 
 // Rotate90DegreesLeft changes the direction of the robot towards left.
