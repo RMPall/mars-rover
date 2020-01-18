@@ -23,7 +23,8 @@ jobs:
       GO111MODULE: "on"
     steps:
       - checkout
-      - run: go build ./...
+      - run: make lint
+      - run: make build
 
       # specify any bash command here prefixed with `run: `
-      - run: go test -v ./...
+      - run: make test
