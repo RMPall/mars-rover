@@ -14,11 +14,13 @@ commands:
                 insteadOf = git+ssh://github.com/' > ~/.gitconfig
             echo 'Host github.com
                     StrictHostKeyChecking no' > ~/.ssh/config
-orbs:
-  codecov: codecov/codecov@1.0.2
 jobs:
+  build:
+    docker:
+      # specify the version
+      - image: circleci/golang:1.9
   test:
-    working_directory: /root/.go_workspace/src/github.com/simplecomputation-service
+    working_directory: /root/.go_workspace/src/github.com/mars-rover
     environment:
       PROJECT: "mars-rover"
       GO111MODULE: "on"
@@ -31,16 +33,6 @@ jobs:
       - run:
           name: go test
           command: make test
-      - run:
-          name: run coverage
-          command: go tool cover -html=cover.out -o coverage.html
-      - run:
-          name: copy to artifacts
-          command: mv coverage.html /tmp/artifacts
-      - store_artifacts:
-          path: /tmp/artifacts
-      - codecov/upload:
-          file: /root/.go_workspace/src/github.com/mars-rover/cover.out
 workflows:
   version: 2
   test:
