@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"mars-rover/pkg/positioning/layout"
+	"mars-rover/pkg/layout"
 )
 
 const (
