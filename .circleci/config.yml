@@ -23,7 +23,6 @@ jobs:
       GO111MODULE: "on"
     steps:
       - checkout
-      - run: make lint
       - run: make build
 
       # specify any bash command here prefixed with `run: `
