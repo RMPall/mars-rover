@@ -92,8 +92,7 @@ func (i *instructor) iAmAbleToSeeTheFinalPositionOfTheRobotInThePlateau(output s
 }
 
 func FeatureContext(s *godog.Suite) {
-	// Before & After
-	var i *instructor = newInstructor()
+	var i = newInstructor()
 	s.Step(`^the layout of the plateau is determined$`, i.theLayoutOfThePlateauIsDetermined)
 	s.Step(`^I send a request "([^"]*)" to position the robot within the plateau boundaries$`, i.iSendARequestToPositionTheRobotWithinThePlateauBoundaries)
 	s.Step(`^I send a set of "([^"]*)" instructions to the robot$`, i.iSendASetOfInstructionsToTheRobot)
