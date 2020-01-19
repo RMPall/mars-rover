@@ -67,7 +67,10 @@ func (i *Interactor) GiveInstructions(instructions []string) error {
 			break
 		}
 
-		i.Repository.Save(robot)
+		err = i.Repository.Save(robot)
+		if err != nil {
+			return err
+		}
 
 		i.Robot.Status = Disabled
 	}
