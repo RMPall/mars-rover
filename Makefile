@@ -1,12 +1,9 @@
-.PHONY:  TOOLS lint
+.PHONY:  lint
 
-
-# Tools required
-TOOLS = github.com/golangci/golangci-lint/cmd/golangci-lint
 
 # Lint
-lint: TOOLS
-	PATH=$(PATH) golangci-lint run
+lint:
+	 golangci-lint run
 
 # build
 build:
