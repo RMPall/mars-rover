@@ -8,6 +8,7 @@ import (
 	"github.com/DATA-DOG/godog"
 )
 
+// This is just to run godog when running go test
 func TestMain(m *testing.M) {
 	status := godog.RunWithOptions("godog", func(s *godog.Suite) {
 		FeatureContext(s)
