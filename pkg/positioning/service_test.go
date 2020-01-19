@@ -55,6 +55,7 @@ func TestNewInteractor(t *testing.T) {
 
 func TestGiveInstructions(t *testing.T) {
 	t.Parallel()
+	orientation := positioning.Orientation(2)
 	type fields struct {
 	}
 	type args struct {
@@ -85,6 +86,7 @@ func TestGiveInstructions(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			newRobot := positioning.NewRobot()
+			newRobot.SetInitialPosition(1, 2, &orientation)
 			orientation := positioning.N
 			newRobot.Position.Orientation = &orientation
 			repoMock := &mocks.RepoMock{}
