@@ -30,3 +30,26 @@ until the first one has finished moving.
 # Output
 
 The output for each rover should be its final co-ordinates and heading.
+
+# Building the code
+
+make build
+
+# Running the code with the given sample.txt
+  
+make run
+
+# Testing the code (will run both unit and behaviour tests)
+
+make test
+
+# Linting 
+
+make lint 
+
+# TODO List 
+
+ - Add coverage (maybe codecov) to circleci
+ - Introduce integration tests (maybe use some framework like http://www.mbtest.org/)
+ - More context splitting is needed
+ - Provide better means of communicating with the robot rather than a file source   
