@@ -6,7 +6,7 @@ TOOLS = curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/maste
 
 # Lint
 lint: tools
-	PATH=$(PATH) golangci-lint run
+	golangci-lint run
 
 # build
 build:
