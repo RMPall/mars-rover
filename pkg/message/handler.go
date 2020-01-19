@@ -18,17 +18,22 @@ const (
 	unknownOrientationErrMsg = "unknown orientation specified"
 )
 
+// Handler struct consists of an interactor , which can be used to interact with the usecases like
+// defining the layout of the plateau, passing instructions for the robot etc.
 type Handler struct {
 	interactor *positioning.Interactor
 }
 
-func NewHandler(i *positioning.Interactor) *Handler {
-	if i == nil {
+// NewHandler returns a handler.If a nil interactor is provded, then
+// a nil handler is returned.
+func NewHandler(interactor *positioning.Interactor) *Handler {
+	if interactor == nil {
 		return nil
 	}
-	return &Handler{interactor: i}
+	return &Handler{interactor: interactor}
 }
 
+// Processor processes the input text and passes the information to the business layers.
 func (h *Handler) Processor(text string) error {
 	message := strings.Split(strings.Replace(text, " ", "", -1), "")
 	if len(message) == 0 {
