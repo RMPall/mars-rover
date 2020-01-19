@@ -1,4 +1,4 @@
-package integration_tests
+package behaviour_tests
 
 import (
 	"os"

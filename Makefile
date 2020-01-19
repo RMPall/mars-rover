@@ -8,13 +8,9 @@ lint:
 build:
 	PATH=$(PATH) go build ./...
 
-# test
+# test (unit test + godog behaviour tests)
 test:
 	PATH=$(PATH) go test ./...
-
-# godog tests
-godog-tests:
-	(go get github.com/DATA-DOG/godog/cmd/godog && cd integration-tests && godog)
 
 # run
 run:
