@@ -1,10 +1,12 @@
-.PHONY:   lint
+.PHONY:  tools lint
 
 
+# Tools required
+TOOLS = curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin v1.20.0
 
 # Lint
-lint:
-	PATH=$(PATH) golangci-lint run ./...
+lint: tools
+	PATH=$(PATH) golangci-lint run
 
 # build
 build:
