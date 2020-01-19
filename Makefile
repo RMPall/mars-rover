@@ -1,4 +1,4 @@
-.PHONY:  tools lint
+.PHONY:   lint
 
 
 
