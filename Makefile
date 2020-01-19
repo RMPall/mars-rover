@@ -1,6 +1,5 @@
 .PHONY:  lint
 
-
 # Lint
 lint:
 	 golangci-lint run
@@ -9,7 +8,7 @@ lint:
 build:
 	PATH=$(PATH) go build ./...
 
-# test
+# test (unit test + godog behaviour tests)
 test:
 	PATH=$(PATH) go test ./...
 
