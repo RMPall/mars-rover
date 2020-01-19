@@ -14,7 +14,7 @@ test:
 
 # godog tests
 godog-tests:
-	(cd integration-tests && godog)
+	(go get github.com/DATA-DOG/godog/cmd/godog && cd integration-tests && godog)
 
 # run
 run:
